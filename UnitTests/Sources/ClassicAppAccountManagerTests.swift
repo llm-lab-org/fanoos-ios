@@ -78,6 +78,6 @@ extension ClassicAppAccount {
                                  avatarURL: "mxc://matrix.org/LYIzLOiILkjQJCqsgzAOUirs",
                                  serverName: "matrix.org",
                                  cryptoStoreURL: classicAppAccountManager.cryptoStoreURL(for: userID),
-                                 cryptoStorePassphrase: cryptoStorePassphrase)
+                                 cryptoStorePassphrase: cryptoStorePassphrase.base64EncodedString())
     }
 }

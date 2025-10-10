@@ -13,7 +13,7 @@ struct ClassicAppAccount: Equatable {
     let avatarURL: URL?
     let serverName: String
     let cryptoStoreURL: URL
-    let cryptoStorePassphrase: Data
+    let cryptoStorePassphrase: String
 }
 
 // MARK: NSCoding Types

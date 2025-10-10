@@ -71,7 +71,7 @@ class ClassicAppAccountManager {
                                  avatarURL: user?.avatarURL.flatMap(URL.init(string:)),
                                  serverName: serverName,
                                  cryptoStoreURL: cryptoStoreURL(for: userID),
-                                 cryptoStorePassphrase: cryptoStorePassphrase)
+                                 cryptoStorePassphrase: cryptoStorePassphrase.base64EncodedString())
     }
     
     private func loadUser(for mxAccount: ClassicAppMXAccount) -> ClassicAppMXUser? {

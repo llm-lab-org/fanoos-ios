@@ -139,6 +139,12 @@ final class AuthenticationStartScreenViewModelTests {
         #expect(authenticationService.homeserver.value.loginMode == .password)
     }
     
+    @Test func classicAppAccount() { }
+    
+    // Classic app account with provisioning link (don't show the classic account?)
+    // Single provider with matching Classic app account (show the classic account)
+    // Single provider with disallowed Classic app account (don't show the classic account)
+    
     // MARK: - Helpers
     
     private func setupViewModel(provisioningParameters: AccountProvisioningParameters? = nil, supportsOIDC: Bool = true) {

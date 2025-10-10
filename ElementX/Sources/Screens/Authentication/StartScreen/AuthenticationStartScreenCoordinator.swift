@@ -17,6 +17,16 @@ struct AuthenticationStartScreenParameters {
     let userIndicatorController: UserIndicatorControllerProtocol
 }
 
+enum AuthenticationStartScreenCoordinatorAction {
+    case loginWithQR
+    case login
+    case register
+    case reportProblem
+    
+    case loginDirectlyWithOIDC(data: OIDCAuthorizationDataProxy, window: UIWindow)
+    case loginDirectlyWithPassword(loginHint: String?)
+}
+
 final class AuthenticationStartScreenCoordinator: CoordinatorProtocol {
     private var viewModel: AuthenticationStartScreenViewModelProtocol
     private let actionsSubject: PassthroughSubject<AuthenticationStartScreenCoordinatorAction, Never> = .init()

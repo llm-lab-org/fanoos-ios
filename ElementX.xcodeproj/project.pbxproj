@@ -1207,6 +1207,7 @@
 		D10BA4F041DC58580A440A32 /* RoomRolesAndPermissionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B1DC3B3FB40A7F4AE9B7BF /* RoomRolesAndPermissionsScreen.swift */; };
 		D12F440F7973F1489F61389D /* NotificationSettingsScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64447FF544298A6A3BEF85 /* NotificationSettingsScreenModels.swift */; };
 		D150D6E96CA6CA09FA50E13C /* LabsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF17EFB2833B4CE5C06E7F8 /* LabsScreenCoordinator.swift */; };
+		D16B3134A7FF4FBA0749014A /* AuthenticationClassicAppAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C45578F406698388B97C07 /* AuthenticationClassicAppAccountView.swift */; };
 		D18B70975644C24F60656C0D /* KnockRequestProxyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07851F4EA81AA3339806A7B /* KnockRequestProxyProtocol.swift */; };
 		D19A748E95E2FAB2940570F0 /* CallScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4103AB4340F2974D690A12A /* CallScreen.swift */; };
 		D2048FD56760BDABA3DB5FC2 /* AppLockServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EAAB54C6CE91D64B69A9F8 /* AppLockServiceProtocol.swift */; };
@@ -1395,6 +1396,7 @@
 		F255083E18CDBFDF7E640FB1 /* Avatars.swift in Sources */ = {isa = PBXBuildFile; fileRef = C142248014E08E885E323E56 /* Avatars.swift */; };
 		F2D5C0E1351DA7BD16867629 /* TimelineStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD4823EAB4B4E8BAB4F6B8C /* TimelineStyle.swift */; };
 		F2E580C0FBFBEFFE9D69893B /* RoomPreviewProxyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739077686814E4EA339B1C83 /* RoomPreviewProxyProtocol.swift */; };
+		F30BC520AC92637EC90B37A0 /* ClassicAppAccountConfirmationScreenViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAB89FCC537BEE9C23A7863 /* ClassicAppAccountConfirmationScreenViewModelTests.swift */; };
 		F34D06F86C29E219E7132E87 /* AuthenticationStartScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71A54CB96DAA1E72C6541D /* AuthenticationStartScreenViewModel.swift */; };
 		F35FAD1B1B289E221A07D719 /* ManageRoomMemberSheetViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7B588A06911B455AC0B4C9 /* ManageRoomMemberSheetViewModelProtocol.swift */; };
 		F37629BAA5E8F50AAF2A131D /* SoftLogoutScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BAD55A4E2B8E5828CD64C /* SoftLogoutScreenViewModel.swift */; };
@@ -2081,6 +2083,7 @@
 		5CEEAE1BFAACD6C96B6DB731 /* PHGPostHogProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHGPostHogProtocol.swift; sourceTree = "<group>"; };
 		5D26A086A8278D39B5756D6F /* project.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = project.yml; sourceTree = "<group>"; };
 		5D53754227CEBD06358956D7 /* PinnedEventsTimelineScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedEventsTimelineScreenCoordinator.swift; sourceTree = "<group>"; };
+		5DAB89FCC537BEE9C23A7863 /* ClassicAppAccountConfirmationScreenViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicAppAccountConfirmationScreenViewModelTests.swift; sourceTree = "<group>"; };
 		5DE8D25D6A91030175D52A20 /* RoomTimelineItemProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTimelineItemProperties.swift; sourceTree = "<group>"; };
 		5E33FD32BBC44D703C7AE4F9 /* TextBasedRoomTimelineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBasedRoomTimelineItem.swift; sourceTree = "<group>"; };
 		5E43D8784B0054C048060FEB /* LabsScreenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsScreenModels.swift; sourceTree = "<group>"; };
@@ -2468,6 +2471,7 @@
 		A4D9DF4F2DF3507F99B5B97B /* LabsScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsScreenViewModel.swift; sourceTree = "<group>"; };
 		A54AAF72E821B4084B7E4298 /* PinnedEventsTimelineFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedEventsTimelineFlowCoordinator.swift; sourceTree = "<group>"; };
 		A566F8F2C27B99E1FB80C69B /* JoinRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRule.swift; sourceTree = "<group>"; };
+		A5C45578F406698388B97C07 /* AuthenticationClassicAppAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationClassicAppAccountView.swift; sourceTree = "<group>"; };
 		A6B19D10B102956066AF117B /* PollOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollOptionView.swift; sourceTree = "<group>"; };
 		A6B891A6DA826E2461DBB40F /* PHGPostHogConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHGPostHogConfiguration.swift; sourceTree = "<group>"; };
 		A6C11AD9813045E44F950410 /* ElementCallWidgetDriverProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementCallWidgetDriverProtocol.swift; sourceTree = "<group>"; };
@@ -2700,6 +2704,7 @@
 		CDE3F3911FF7CC639BDE5844 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE20623EB4A9B88FB29F2BA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/SAS.strings; sourceTree = "<group>"; };
 		CEE41494C837AA403A06A5D9 /* UnitTests.xctestplan */ = {isa = PBXFileReference; path = UnitTests.xctestplan; sourceTree = "<group>"; };
+		CF05437C99730E5B3357FC51 /* matrix-rust-sdk */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "matrix-rust-sdk"; path = "../matrix-rust-sdk"; sourceTree = SOURCE_ROOT; };
 		CF19027E7FFA5E63D148873A /* CreateRoomScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomScreenViewModel.swift; sourceTree = "<group>"; };
 		CF847A34FC4C8C937CD39E08 /* LabsScreenViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsScreenViewModelProtocol.swift; sourceTree = "<group>"; };
 		CFFA5E881D281810AB428EA3 /* RoomPowerLevelsProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomPowerLevelsProxy.swift; sourceTree = "<group>"; };
@@ -4790,6 +4795,7 @@
 				7EECE8B331CD169790EF284F /* BugReportScreenViewModelTests.swift */,
 				EFFD3200F9960D4996159F10 /* BugReportServiceTests.swift */,
 				0328F54E0C3AAEDDF3E05D9D /* ChatsTabFlowCoordinatorTests.swift */,
+				5DAB89FCC537BEE9C23A7863 /* ClassicAppAccountConfirmationScreenViewModelTests.swift */,
 				80935ADC7ED867226225F965 /* ClassicAppAccountManagerTests.swift */,
 				D5EA0312A6262484AA393AC9 /* CompletionSuggestionServiceTests.swift */,
 				CA29952595B804DA221A0C1D /* ComposerToolbarViewModelTests.swift */,
@@ -5423,6 +5429,7 @@
 			isa = PBXGroup;
 			children = (
 				174E4AEF3DED300AA81046EC /* compound-ios */,
+				CF05437C99730E5B3357FC51 /* matrix-rust-sdk */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -5643,6 +5650,7 @@
 		A18A0DA2E598A7E76C50E53D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A5C45578F406698388B97C07 /* AuthenticationClassicAppAccountView.swift */,
 				98784280D98C852727BE0111 /* AuthenticationStartLogo.swift */,
 				A768CA51A59B8A5D8C8FD599 /* AuthenticationStartScreen.swift */,
 				682BC7BAF0EFEF512A8C5140 /* AuthenticationStartScreenBackgroundImage.swift */,
@@ -7278,7 +7286,6 @@
 				CCD235515AFCEE6D2005B705 /* XCRemoteSwiftPackageReference "LRUCache" */,
 				4BDA7F6042968E8422470F3F /* XCRemoteSwiftPackageReference "LoremSwiftum" */,
 				0CBF57301AA172C21F76CE86 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */,
-				6FC4820D8D4559CEECA064D7 /* XCRemoteSwiftPackageReference "matrix-rust-components-swift" */,
 				96495DD8554E2F39D3954354 /* XCRemoteSwiftPackageReference "posthog-ios" */,
 				A08925A9D5E3770DEB9D8509 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 				E9C4F3A12AA1F65C13A8C8EB /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
@@ -7289,6 +7296,7 @@
 				EC6D0C817B1C21D9D096505A /* XCRemoteSwiftPackageReference "Version" */,
 				EE40B0E16A55BD23ECBFFD22 /* XCRemoteSwiftPackageReference "matrix-rich-text-editor-swift" */,
 				C89CF7729E028671C5DC461E /* XCLocalSwiftPackageReference "compound-ios" */,
+				8FB6F8BBB0A235E3C8DCF8F7 /* XCLocalSwiftPackageReference "../matrix-rust-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
@@ -7686,6 +7694,7 @@
 				1B2F9F368619FFF8C63C87CC /* BugReportScreenViewModelTests.swift in Sources */,
 				7F61F9ACD5EC9E845EF3EFBF /* BugReportServiceTests.swift in Sources */,
 				4BD5AB54A6982CF19F5CC7C4 /* ChatsTabFlowCoordinatorTests.swift in Sources */,
+				F30BC520AC92637EC90B37A0 /* ClassicAppAccountConfirmationScreenViewModelTests.swift in Sources */,
 				1F1BCEE81056FD9F344F3B0E /* ClassicAppAccountManagerTests.swift in Sources */,
 				B5321A1F5B26A0F3EC54909E /* CollapsibleFlowLayoutTests.swift in Sources */,
 				3A164187907DA43B7858F9EC /* CompletionSuggestionServiceTests.swift in Sources */,
@@ -7968,6 +7977,7 @@
 				88F348E2CB14FF71CBBB665D /* AudioRoomTimelineItemContent.swift in Sources */,
 				7BD2123144A32F082CECC108 /* AudioRoomTimelineView.swift in Sources */,
 				9278EC51D24E57445B290521 /* AudioSessionProtocol.swift in Sources */,
+				D16B3134A7FF4FBA0749014A /* AuthenticationClassicAppAccountView.swift in Sources */,
 				A51C65E5A3C9F2464A91A380 /* AuthenticationClientBuilderFactoryMock.swift in Sources */,
 				AE066FC93E7B707C826B335A /* AuthenticationClientFactory.swift in Sources */,
 				67E9926C4572C54F59FCA91A /* AuthenticationFlowCoordinator.swift in Sources */,
@@ -9835,6 +9845,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		8FB6F8BBB0A235E3C8DCF8F7 /* XCLocalSwiftPackageReference "../matrix-rust-sdk" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../matrix-rust-sdk";
+		};
 		C89CF7729E028671C5DC461E /* XCLocalSwiftPackageReference "compound-ios" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "compound-ios";
@@ -9896,14 +9910,6 @@
 			requirement = {
 				kind = upToNextMinorVersion;
 				minimumVersion = 6.0.0;
-			};
-		};
-		6FC4820D8D4559CEECA064D7 /* XCRemoteSwiftPackageReference "matrix-rust-components-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/element-hq/matrix-rust-components-swift";
-			requirement = {
-				kind = exactVersion;
-				version = 26.03.10;
 			};
 		};
 		701C7BEF8F70F7A83E852DCC /* XCRemoteSwiftPackageReference "GZIP" */ = {
@@ -10196,7 +10202,6 @@
 		};
 		6647C55D93508C7CE9D954A5 /* MatrixRustSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FC4820D8D4559CEECA064D7 /* XCRemoteSwiftPackageReference "matrix-rust-components-swift" */;
 			productName = MatrixRustSDK;
 		};
 		6690850AA47ECED7E1CAB345 /* KZFileWatchers */ = {
@@ -10286,7 +10291,6 @@
 		};
 		A678E40E917620059695F067 /* MatrixRustSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FC4820D8D4559CEECA064D7 /* XCRemoteSwiftPackageReference "matrix-rust-components-swift" */;
 			productName = MatrixRustSDK;
 		};
 		A7CA6F33C553805035C3B114 /* DeviceKit */ = {
@@ -10306,7 +10310,6 @@
 		};
 		B1E8B697DF78FE7F61FC6CA4 /* MatrixRustSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FC4820D8D4559CEECA064D7 /* XCRemoteSwiftPackageReference "matrix-rust-components-swift" */;
 			productName = MatrixRustSDK;
 		};
 		BA93CD75CCE486660C9040BD /* Collections */ = {
@@ -10316,7 +10319,6 @@
 		};
 		BB111AE9D390233CDD2C7FD5 /* MatrixRustSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FC4820D8D4559CEECA064D7 /* XCRemoteSwiftPackageReference "matrix-rust-components-swift" */;
 			productName = MatrixRustSDK;
 		};
 		BC01130651CB23340B899032 /* DeviceKit */ = {
@@ -10331,17 +10333,14 @@
 		};
 		C07EA60CAB296D7726210F5B /* MatrixRustSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FC4820D8D4559CEECA064D7 /* XCRemoteSwiftPackageReference "matrix-rust-components-swift" */;
 			productName = MatrixRustSDK;
 		};
 		C2C69B8BA5A9702E7A8BC08F /* MatrixRustSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FC4820D8D4559CEECA064D7 /* XCRemoteSwiftPackageReference "matrix-rust-components-swift" */;
 			productName = MatrixRustSDK;
 		};
 		C79D91A7F9F378CECEF64B5A /* MatrixRustSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FC4820D8D4559CEECA064D7 /* XCRemoteSwiftPackageReference "matrix-rust-components-swift" */;
 			productName = MatrixRustSDK;
 		};
 		CA07D57389DACE18AEB6A5E2 /* WysiwygComposer */ = {
@@ -10371,7 +10370,6 @@
 		};
 		DB9D6197EEDBA2CC860208E2 /* MatrixRustSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FC4820D8D4559CEECA064D7 /* XCRemoteSwiftPackageReference "matrix-rust-components-swift" */;
 			productName = MatrixRustSDK;
 		};
 		DCA3C4A997AD28E6918D4CE5 /* Compound */ = {

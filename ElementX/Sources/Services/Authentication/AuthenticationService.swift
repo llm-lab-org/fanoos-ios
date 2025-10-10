@@ -28,6 +28,8 @@ class AuthenticationService: AuthenticationServiceProtocol {
 
     private(set) var flow: AuthenticationFlow
     
+    let classicAppAccount: ClassicAppAccount?
+    
     init(userSessionStore: UserSessionStoreProtocol,
          encryptionKeyProvider: EncryptionKeyProviderProtocol,
          classicAppManager: ClassicAppManagerProtocol?,
@@ -45,14 +47,15 @@ class AuthenticationService: AuthenticationServiceProtocol {
         
         do {
             if let classicAppManager {
-                // Just let the app manager log the detected account for now.
-                _ = try classicAppManager.loadAccounts()
+                classicAppAccount = try classicAppManager.loadAccounts().first
             } else {
                 MXLog.info("Classic App not configured, skipping loadAccounts.")
+                classicAppAccount = nil
             }
         } catch {
             // This should show an alert: "We have detected an older version of Element Classic, but no bueno!"
             MXLog.error("Failed loading accounts from the Classic app: \(error)")
+            classicAppAccount = nil
         }
         
         // When updating these, don't forget to update the reset method too.
@@ -129,6 +132,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
         guard let client else { return .failure(.failedLoggingIn) }
         do {
             try await client.loginWithOidcCallback(callbackUrl: callbackURL.absoluteString)
+            await verifyClientIfPossible(client: client)
             return await userSession(for: client)
         } catch OidcError.Cancelled {
             return .failure(.oidcError(.userCancellation))
@@ -149,6 +153,8 @@ class AuthenticationService: AuthenticationServiceProtocol {
                 _ = try? await client.logout()
                 return .failure(.sessionTokenRefreshNotSupported)
             }
+            
+            await verifyClientIfPossible(client: client)
             
             return await userSession(for: client)
         } catch let ClientError.MatrixApi(errorKind, _, _, _) {
@@ -205,6 +211,9 @@ class AuthenticationService: AuthenticationServiceProtocol {
                 let qrCodeHandler = client.newLoginWithQrCodeHandler(oidcConfiguration: appSettings.oidcConfiguration.rustValue)
                 try await qrCodeHandler.scan(qrCodeData: qrData, progressListener: listener)
                 
+                // Since the QR code login flow includes verification.
+                appSettings.hasRunIdentityConfirmationOnboarding = true
+                
                 switch await userSession(for: client) {
                 case .success(let userSession):
                     progressSubject.send(.signedIn(userSession))
@@ -254,6 +263,28 @@ class AuthenticationService: AuthenticationServiceProtocol {
         sessionDirectories = .init()
     }
     
+    private func verifyClientIfPossible(client: ClientProtocol) async {
+        // Technically the SDK makes sure the secrets are for the correct account, but as
+        // we want to verify the classic account regardless which flow was used, it seems
+        // sane to avoid loading the secrets when we know that they're not relevant.
+        if let classicAppAccount, classicAppAccount.userID == (try? client.userId()) {
+            MXLog.info("Found matching classic app account, importing secrets.")
+            
+            do {
+                let secrets = try await SecretsBundleWithUserId.fromDatabase(databasePath: classicAppAccount.cryptoStoreURL.path(percentEncoded: false),
+                                                                             passphrase: classicAppAccount.cryptoStorePassphrase)
+                try await client.encryption().importSecretsBundle(secretsBundle: secrets)
+                
+                MXLog.info("Secrets imported.")
+                
+                // Importing the secrets automatically verifies the session.
+                appSettings.hasRunIdentityConfirmationOnboarding = true
+            } catch {
+                MXLog.error("Failed to import secrets for classic app account: \(error)")
+            }
+        }
+    }
+    
     private func userSession(for client: ClientProtocol) async -> Result<UserSessionProtocol, AuthenticationServiceError> {
         switch await userSessionStore.userSession(for: client, sessionDirectories: sessionDirectories, passphrase: passphrase) {
         case .success(let clientProxy):
@@ -291,9 +322,13 @@ private extension HumanQrLoginError {
 
 extension AuthenticationService {
     static var mock: AuthenticationService {
+        mock(classicAppManager: nil)
+    }
+    
+    static func mock(classicAppManager: ClassicAppManagerProtocol?) -> AuthenticationService {
         AuthenticationService(userSessionStore: UserSessionStoreMock(configuration: .init()),
                               encryptionKeyProvider: EncryptionKeyProvider(),
-                              classicAppManager: nil,
+                              classicAppManager: classicAppManager,
                               clientFactory: AuthenticationClientFactoryMock(configuration: .init()),
                               appSettings: ServiceLocator.shared.settings,
                               appHooks: AppHooks())

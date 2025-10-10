@@ -8,18 +8,6 @@
 
 import SwiftUI
 
-// MARK: - Coordinator
-
-enum AuthenticationStartScreenCoordinatorAction {
-    case loginWithQR
-    case login
-    case register
-    case reportProblem
-    
-    case loginDirectlyWithOIDC(data: OIDCAuthorizationDataProxy, window: UIWindow)
-    case loginDirectlyWithPassword(loginHint: String?)
-}
-
 enum AuthenticationStartScreenViewModelAction: Equatable {
     case loginWithQR
     case login
@@ -37,6 +25,9 @@ struct AuthenticationStartScreenViewState: BindableState {
     let serverName: String?
     let showCreateAccountButton: Bool
     let showQRCodeLoginButton: Bool
+    
+    enum ClassicAppMode { case welcomeBack(ClassicAppAccount), otherOptions(ClassicAppAccount) }
+    var classicAppMode: ClassicAppMode?
     
     let hideBrandChrome: Bool
     
@@ -69,4 +60,8 @@ enum AuthenticationStartScreenViewAction {
     case login
     case register
     case reportProblem
+    
+    case continueWithClassic(ClassicAppAccount)
+    case otherOptions(ClassicAppAccount)
+    case closeOtherOptions(ClassicAppAccount)
 }

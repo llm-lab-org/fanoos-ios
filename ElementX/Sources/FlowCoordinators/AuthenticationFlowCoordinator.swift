@@ -318,8 +318,6 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
                 stateMachine.tryEvent(.confirmServer(.login))
             case .signedIn(let userSession):
                 navigationStackCoordinator.setSheetCoordinator(nil)
-                // Since the qr code login flow includes verification
-                appSettings.hasRunIdentityConfirmationOnboarding = true
                 DispatchQueue.main.async {
                     self.stateMachine.tryEvent(.signedIn, userInfo: userSession)
                 }

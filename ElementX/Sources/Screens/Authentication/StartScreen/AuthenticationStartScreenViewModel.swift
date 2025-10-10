@@ -24,7 +24,7 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
     var actions: AnyPublisher<AuthenticationStartScreenViewModelAction, Never> {
         actionsSubject.eraseToAnyPublisher()
     }
-
+    
     init(authenticationService: AuthenticationServiceProtocol,
          provisioningParameters: AccountProvisioningParameters?,
          isBugReportServiceEnabled: Bool,
@@ -37,6 +37,8 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
         canReportProblem = isBugReportServiceEnabled
         
         let isQRCodeScanningSupported = !ProcessInfo.processInfo.isiOSAppOnMac
+        let classicAppAccountProvider = authenticationService.classicAppAccount?.serverName
+        let isClassicAppAccountAllowed = classicAppAccountProvider.map { appSettings.accountProviders.contains($0) } ?? false
         
         let initialViewState = if !appSettings.allowOtherAccountProviders {
             // We don't show the create account button when custom providers are disallowed.
@@ -44,24 +46,27 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
             AuthenticationStartScreenViewState(serverName: appSettings.accountProviders.count == 1 ? appSettings.accountProviders[0] : nil,
                                                showCreateAccountButton: false,
                                                showQRCodeLoginButton: isQRCodeScanningSupported,
+                                               classicAppMode: isClassicAppAccountAllowed ? authenticationService.classicAppAccount.map { .welcomeBack($0) } : nil,
                                                hideBrandChrome: appSettings.hideBrandChrome)
         } else if let provisioningParameters {
             // We only show the "Sign in to …" button when using a provisioning link.
             AuthenticationStartScreenViewState(serverName: provisioningParameters.accountProvider,
                                                showCreateAccountButton: false,
                                                showQRCodeLoginButton: false,
+                                               classicAppMode: nil,
                                                hideBrandChrome: appSettings.hideBrandChrome)
         } else {
             // The default configuration.
             AuthenticationStartScreenViewState(serverName: nil,
                                                showCreateAccountButton: appSettings.showCreateAccountButton,
                                                showQRCodeLoginButton: isQRCodeScanningSupported,
+                                               classicAppMode: authenticationService.classicAppAccount.map { .welcomeBack($0) },
                                                hideBrandChrome: appSettings.hideBrandChrome)
         }
         
         super.init(initialViewState: initialViewState)
     }
-
+    
     override func process(viewAction: AuthenticationStartScreenViewAction) {
         switch viewAction {
         case .updateWindow(let window):
@@ -77,13 +82,21 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
             if canReportProblem {
                 actionsSubject.send(.reportProblem)
             }
+        case .continueWithClassic(let account):
+            Task { await login(classicAppAccount: account) }
+        case .otherOptions(let account):
+            state.classicAppMode = .otherOptions(account)
+        case .closeOtherOptions(let account):
+            state.classicAppMode = .welcomeBack(account)
         }
     }
     
     // MARK: - Private
     
-    private func login() async {
-        if let serverName = state.serverName {
+    private func login(classicAppAccount: ClassicAppAccount? = nil) async {
+        if let classicAppAccount {
+            await configureAccountProvider(classicAppAccount.serverName, loginHint: "mxid:\(classicAppAccount.userID)")
+        } else if let serverName = state.serverName {
             await configureAccountProvider(serverName, loginHint: provisioningParameters?.loginHint)
         } else {
             actionsSubject.send(.login) // No need to configure anything here, continue the flow.
@@ -132,6 +145,7 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
     }
     
     private func displayError() {
+        #warning("We should have specific messages here.")
         state.bindings.alertInfo = AlertInfo(id: .genericError)
     }
 }
