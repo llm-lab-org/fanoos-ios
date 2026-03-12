@@ -179,18 +179,21 @@ class AuthenticationService: AuthenticationServiceProtocol {
             return progressSubject.asCurrentValuePublisher()
         }
         
-        // At some stage the SDK will have a `qrCodeData.intent` which we should check before continuing here.
-        // Note the equivalent check will also happen for linking a device by QR in the LinkNewDeviceService.
+        // n.b. We rely on the SDK checking that the intent of the QR is suitable for us to login with.
         
-        guard let scannedServerName = qrData.serverName() else {
+        // Future versions of the QR should always give us the baseUrl
+        guard let scannedServerNameOrBaseUrl = qrData.baseUrl() ?? qrData.serverName() else {
+            // With the older version of QR we treat the presence of serverName as meaning that the other device
+            // is not signed in.
             MXLog.error("The QR code is from a device that is not yet signed in.")
             progressSubject.send(completion: .failure(.qrCodeError(.deviceNotSignedIn)))
             return progressSubject.asCurrentValuePublisher()
         }
         
-        if !appSettings.allowOtherAccountProviders, !appSettings.accountProviders.contains(scannedServerName) {
-            MXLog.error("The scanned device's server is not allowed: \(scannedServerName)")
-            progressSubject.send(completion: .failure(.qrCodeError(.providerNotAllowed(scannedProvider: scannedServerName, allowedProviders: appSettings.accountProviders))))
+        // TODO: do we need to extract the serverName from the baseUrl?
+        if !appSettings.allowOtherAccountProviders, !appSettings.accountProviders.contains(scannedServerNameOrBaseUrl) {
+            MXLog.error("The scanned device's server is not allowed: \(scannedServerNameOrBaseUrl)")
+            progressSubject.send(completion: .failure(.qrCodeError(.providerNotAllowed(scannedProvider: scannedServerNameOrBaseUrl, allowedProviders: appSettings.accountProviders))))
             return progressSubject.asCurrentValuePublisher()
         }
         
@@ -201,7 +204,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
         
         Task {
             do {
-                let client = try await makeClient(homeserverAddress: scannedServerName)
+                let client = try await makeClient(homeserverAddress: scannedServerNameOrBaseUrl)
                 let qrCodeHandler = client.newLoginWithQrCodeHandler(oidcConfiguration: appSettings.oidcConfiguration.rustValue)
                 try await qrCodeHandler.scan(qrCodeData: qrData, progressListener: listener)
                 
@@ -281,6 +284,8 @@ private extension HumanQrLoginError {
             .qrCodeError(.slidingSyncNotAvailable)
         case .OtherDeviceNotSignedIn:
             .qrCodeError(.deviceNotSignedIn)
+        case .UnsupportedQrCodeType:
+            .qrCodeError(.invalidQRCode)
         case .Unknown, .OidcMetadataInvalid, .CheckCodeAlreadySent, .CheckCodeCannotBeSent:
             .qrCodeError(.unknown)
         }
